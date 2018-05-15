@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-jouve-facedetector" version="0.0.1">
+    <name>Jouve Facedetector</name>
+    <description>Cordova Jouve Facedetector Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,facedetector,mobilevision</keywords>
+
+    <js-module src="www/facedetector.js" name="facedetector">
+      <merges target="jouve" />
+    </js-module>
+
+    <platform name="ios">
+      <config-file target="config.xml" parent="/*">
+        <feature name="facedetector">
+          <param name="ios-package" value="CDVJouveFaceDetector"/>
+        </feature>
+      </config-file>
+      <header-file src="src/ios/CDVJouveFaceDetector.h" />
+      <source-file src="src/ios/CDVJouveFaceDetector.m" />
+    </platform>
+
+    <platform name="android">
+      <config-file parent="/*" target="res/xml/config.xml">
+        <feature name="facedetector">
+          <param name="android-package" value="com.jouve.facedetector.FaceDetector" />
+        </feature>
+      </config-file>
+	    <source-file src="src/android/FaceDetector.java" target-dir="src/com/jouve/facedetector" />
+  </platform>
+</plugin>
