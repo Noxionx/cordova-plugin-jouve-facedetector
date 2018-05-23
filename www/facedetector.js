@@ -1,62 +1,24 @@
-var exec = require('cordova/exec'),
-    argscheck = require('cordova/argscheck'),
-    utils = require('cordova/utils');
+var PLUGIN_NAME = 'FaceDetector';
 
-PLUGIN_NAME = 'FaceDetector';
+var running = false;
 
-module.exports = (function() {
-    var running = false;
+var FaceDetector = function() {};
 
-    var _facedetector = {};
+FaceDetector.prototype.start = function(success, fail) {
+    exec(success, fail, PLUGIN_NAME, "start", []);
+};
 
-    _facedetector.isRunning = function() { return running; };
+FaceDetector.prototype.stop = function(success, fail) {
+    exec(success, fail, PLUGIN_NAME, "stop", []);
+};
 
-    _facedetector.start = function(successCallback,errorCallback) {
-        var onSuccess = function(faces) {
-            running = true;
-            if (successCallback) {
-                  successCallback(faces);
-            }
-        };
-                  
-        exec(onSuccess,
-             errorCallback,
-             PLUGIN_NAME,
-             "start",
-             [window.innerWidth, window.innerHeight]);
-    }
-               
-     _facedetector.stop = function(successCallback,errorCallback) {
+if (!window.plugins) {
+    window.plugins = {};
+}
+if (!window.plugins.faceDetector) {
+    window.plugins.faceDetector = new FaceDetector();
+}
 
-        var onSuccess = function() {
-            running = false;
-            if (successCallback) {
-                  successCallback();
-            }
-        };
-
-        exec(onSuccess,
-             errorCallback,
-             PLUGIN_NAME,
-             "stop",
-             []);
-
-    }
-    
-    function update() {
-        setTimeout(
-            function() {
-                exec(null,
-                    null,
-                    PLUGIN_NAME,
-                    "update",
-                    [window.innerWidth, window.innerHeight]);
-            },1500);
-    }
-    
-    window.addEventListener('orientationchange',update);
-
-    
-    return _facedetector;
-    
-}());
+if (module.exports) {
+    module.exports = FaceDetector;
+}

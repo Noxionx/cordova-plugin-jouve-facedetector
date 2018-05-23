@@ -26,19 +26,18 @@ public class FaceDetector extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     if (action.equals("start")) {
       Log.d(TAG, "start");
-    } else if (action.equals("stop")) {
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Start Face Detector !"));
+      return true;
+    }
+    
+    if (action.equals("stop")) {
       Log.d(TAG, "stop");
-    } else if (action.equals("update")) {
-      Log.d(TAG, "update");
-      callbackContext.success();
-    } else {
-      return false;
+      callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "Stop Face Detector !"));
+      return true;
     }
 
-    PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT, "");
-    result.setKeepCallback(true);
-    callbackContext.sendPluginResult(result);
-    return true;
+    callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
+    return false;
   }
 
 }
