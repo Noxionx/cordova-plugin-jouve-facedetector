@@ -16,7 +16,7 @@ if (!window.plugins) {
     window.plugins = {};
 }
 if (!window.plugins.faceDetector) {
-    window.plugins.faceDetector = new FaceDetector();
+    window.plugins.facedetector = new FaceDetector();
 }
 
 if (module.exports) {

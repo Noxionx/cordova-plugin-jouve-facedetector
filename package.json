@@ -1,17 +1,15 @@
 {
   "name": "cordova-plugin-jouve-facedetector",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Cordova Jouve FaceDetector Plugin",
   "keywords": [
     "face detection",
     "ecosystem:cordova",
-    "cordova-ios",
     "cordova-android"
   ],
   "cordova": {
     "id": "cordova-plugin-jouve-facedetector",
     "platforms": [
-      "ios",
       "android"
     ]
   }
